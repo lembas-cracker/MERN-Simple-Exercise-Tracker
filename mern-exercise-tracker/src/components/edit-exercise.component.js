@@ -18,7 +18,7 @@ export default function EditExercise(props) {
 
     //getting and showing all the exercises and users that have been added to the db so far
     useEffect(() => {
-        axios.get(API_BASE_URL + '/exercises' + params.id)
+        axios.get(API_BASE_URL + '/exercises/' + params.id)
             .then(res => {
                 setUsername(res.data.username)
                 setDescription(res.datadescription)
