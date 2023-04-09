@@ -3,6 +3,7 @@ import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useParams } from 'react-router-dom'
+import { API_BASE_URL } from '../api.js'
 
 export default function EditExercise(props) {
     const [username, setUsername] = useState('')
@@ -17,7 +18,7 @@ export default function EditExercise(props) {
 
     //getting and showing all the exercises and users that have been added to the db so far
     useEffect(() => {
-        axios.get('http://localhost:5000/exercises' + params.id)
+        axios.get(API_BASE_URL + '/exercises' + params.id)
             .then(res => {
                 setUsername(res.data.username)
                 setDescription(res.datadescription)
@@ -25,7 +26,7 @@ export default function EditExercise(props) {
                 setDate(new Date(res.data.date))
             }).catch(err => console.log(err))
 
-        axios.get('http://localhost:5000/users')
+        axios.get(API_BASE_URL + '/users')
             .then(res => {
                 if (res.data.length > 0) {
                     setUsers(res.data.map(user => user.username))
@@ -59,7 +60,7 @@ export default function EditExercise(props) {
         }
         console.log(exercise)
 
-        axios.post('http://localhost:5000/exercises/update' + params.id, exercise)
+        axios.post(API_BASE_URL + '/exercises/update' + params.id, exercise)
             .then(res => console.log(res.data))
 
         window.location = '/'

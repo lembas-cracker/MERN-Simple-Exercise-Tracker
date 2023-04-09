@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { API_BASE_URL } from '../api.js'
 
 
 const Exercise = props => {
@@ -23,7 +24,7 @@ export default function ExercisesList() {
     const [exercises, setExercises] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/exercises/')
+        axios.get(API_BASE_URL + '/exercises/')
             .then(res => {
                 setExercises(res.data)
                 console.log(res.data)
@@ -33,7 +34,7 @@ export default function ExercisesList() {
 
 
     const deleteExercise = (id) => {
-        axios.delete('http://localhost:5000/exercises/' + id)
+        axios.delete(API_BASE_URL + '/exercises/' + id)
             .then(res => console.log(res.data))
 
         setExercises(exercises.filter(el => el._id !== id))

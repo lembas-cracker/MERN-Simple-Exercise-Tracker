@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
+import { API_BASE_URL } from '../api.js'
 
 export default function CreateUser() {
     const [username, setUsername] = useState('')
@@ -16,7 +17,7 @@ export default function CreateUser() {
         }
         console.log(user)
 
-        axios.post('http://localhost:5000/users/add', user).then(res => console.log(res.data))
+        axios.post(API_BASE_URL + '/users/add', user).then(res => console.log(res.data))
 
         setUsername('')
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { API_BASE_URL } from '../api.js'
 
 
 export default function CreateExercise(props) {
@@ -16,7 +17,7 @@ export default function CreateExercise(props) {
 
     //getting and showing all the users that have been added to the db so far in the dropdown menu
     useEffect(() => {
-        axios.get('http://localhost:5000/users')
+        axios.get(API_BASE_URL + '/users')
             .then(res => {
                 if (res.data.length > 0) {
                     setUsers(res.data.map(user => user.username))
@@ -50,7 +51,7 @@ export default function CreateExercise(props) {
         }
         console.log(exercise)
 
-        axios.post('http://localhost:5000/exercises/add', exercise).then(res => console.log(res.data))
+        axios.post(API_BASE_URL + '/exercises/add', exercise).then(res => console.log(res.data))
 
         window.location = '/'
     }
