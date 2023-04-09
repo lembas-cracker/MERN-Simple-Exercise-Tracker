@@ -59,7 +59,7 @@ export default function EditExercise(props) {
             duration: duration,
             date: date
         }
-        axios.post(API_BASE_URL + '/exercises/update' + params.id, exercise)
+        axios.post(API_BASE_URL + '/exercises/update/' + params.id, exercise)
 
         navigate('/')
     }
