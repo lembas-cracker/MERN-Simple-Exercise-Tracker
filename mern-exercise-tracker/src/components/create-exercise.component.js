@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+
 
 export default function CreateExercise(props) {
     const [username, setUsername] = useState('')
@@ -12,9 +14,15 @@ export default function CreateExercise(props) {
     const userInput = useRef()
 
 
+    //getting and showing all the users that have been added to the db so far in the dropdown menu
     useEffect(() => {
-        setUsers(['test user'])
-        setUsername('test user')
+        axios.get('http://localhost:5000/users')
+            .then(res => {
+                if (res.data.length > 0) {
+                    setUsers(res.data.map(user => user.username))
+                    setUsername(res.data[0].username)
+                }
+            })
     }, [])
 
 
@@ -42,6 +50,8 @@ export default function CreateExercise(props) {
         }
         console.log(exercise)
 
+        axios.post('http://localhost:5000/exercises/add', exercise).then(res => console.log(res.data))
+
         window.location = '/'
     }
 
@@ -60,7 +70,7 @@ export default function CreateExercise(props) {
                         onChange={onChangeUsername}>
                         {
                             users.map(user => {
-                                return <option key={user} value={user}>
+                                return <option key={user} value={user} className="text-light bg-dark">
                                     {user}
                                 </option>
                             })
