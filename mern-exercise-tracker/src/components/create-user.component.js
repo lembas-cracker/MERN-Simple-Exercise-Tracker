@@ -15,9 +15,7 @@ export default function CreateUser() {
         const user = {
             username: username
         }
-        console.log(user)
-
-        axios.post(API_BASE_URL + '/users/add', user).then(res => console.log(res.data))
+        axios.post(API_BASE_URL + '/users/add', user)
 
         setUsername('')
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../api.js'
 
 
@@ -13,7 +14,7 @@ export default function CreateExercise(props) {
     const [users, setUsers] = useState([])
 
     const userInput = useRef()
-
+    const navigate = useNavigate()
 
     //getting and showing all the users that have been added to the db so far in the dropdown menu
     useEffect(() => {
@@ -36,7 +37,7 @@ export default function CreateExercise(props) {
     const onChangeDuration = (e) => {
         setDuration(e.target.value)
     }
-    const onChangeDate = (e) => {
+    const onChangeDate = (date) => {
         setDate(date)
     }
 
@@ -49,11 +50,9 @@ export default function CreateExercise(props) {
             duration: duration,
             date: date
         }
-        console.log(exercise)
-
         axios.post(API_BASE_URL + '/exercises/add', exercise).then(res => console.log(res.data))
 
-        window.location = '/'
+        navigate('/')
     }
 
 

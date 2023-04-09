@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../api.js'
 
 export default function EditExercise(props) {
@@ -14,6 +14,7 @@ export default function EditExercise(props) {
 
     const userInput = useRef()
     const params = useParams()
+    const navigate = useNavigate()
 
 
     //getting and showing all the exercises and users that have been added to the db so far
@@ -58,12 +59,9 @@ export default function EditExercise(props) {
             duration: duration,
             date: date
         }
-        console.log(exercise)
-
         axios.post(API_BASE_URL + '/exercises/update' + params.id, exercise)
-            .then(res => console.log(res.data))
 
-        window.location = '/'
+        navigate('/')
     }
 
 

@@ -27,7 +27,6 @@ export default function ExercisesList() {
         axios.get(API_BASE_URL + '/exercises/')
             .then(res => {
                 setExercises(res.data)
-                console.log(res.data)
             })
             .catch(err => console.log(err))
     }, [])
@@ -35,7 +34,6 @@ export default function ExercisesList() {
 
     const deleteExercise = (id) => {
         axios.delete(API_BASE_URL + '/exercises/' + id)
-            .then(res => console.log(res.data))
 
         setExercises(exercises.filter(el => el._id !== id))
     }
